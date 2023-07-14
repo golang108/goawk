@@ -119,23 +119,25 @@ type interp struct {
 	reparseCSV      bool
 
 	// Built-in variables
-	argc             int
-	convertFormat    string
-	outputFormat     string
-	fieldSep         string
-	fieldSepRegex    *regexp.Regexp
-	recordSep        string
-	recordSepRegex   *regexp.Regexp
-	recordTerminator string
-	outputFieldSep   string
-	outputRecordSep  string
-	subscriptSep     string
-	matchLength      int
-	matchStart       int
-	inputMode        IOMode
-	csvInputConfig   CSVInputConfig
-	outputMode       IOMode
-	csvOutputConfig  CSVOutputConfig
+	argc               int
+	convertFormat      string
+	outputFormat       string
+	fieldSep           string
+	fieldSepRegex      *regexp.Regexp
+	savedFieldSep      string
+	savedFieldSepRegex *regexp.Regexp
+	recordSep          string
+	recordSepRegex     *regexp.Regexp
+	recordTerminator   string
+	outputFieldSep     string
+	outputRecordSep    string
+	subscriptSep       string
+	matchLength        int
+	matchStart         int
+	inputMode          IOMode
+	csvInputConfig     CSVInputConfig
+	outputMode         IOMode
+	csvOutputConfig    CSVOutputConfig
 
 	// Parsed program, compiled functions and constants
 	program   *parser.Program
@@ -388,6 +390,7 @@ func newInterp(program *parser.Program) *interp {
 	p.convertFormat = "%.6g"
 	p.outputFormat = "%.6g"
 	p.fieldSep = " "
+	p.savedFieldSep = " "
 	p.recordSep = "\n"
 	p.outputFieldSep = " "
 	p.outputRecordSep = "\n"

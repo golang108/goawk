@@ -401,6 +401,9 @@ BEGIN {
 		print k, a[k]
 	}
 }`, "", "\x1c\nonetwo\n1\x1c2 onetwo\n|\nonetwo\n1|2 onetwo\n", "", ""},
+	// Ensure we use the value of FS when the record was read (not when the
+	// fields are lazily split).
+	{`{ FS=","; print $1; print $2 }`, "a,b c", "a,b\nc\n", "", ""},
 
 	// Field expressions and assignment (and interaction with NF)
 	{`{ print NF; NF=1; $2="two"; print $0, NF }`, "\n", "0\n two 2\n", "", ""},
